@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mansvi Sahu — mansvi.init()</title>
+<meta name="description" content="Mansvi Sahu — CS student building small AI/software projects, creating content, and documenting the journey from classroom to career.">
+<meta property="og:title" content="Mansvi Sahu — mansvi.init()">
+<meta property="og:description" content="CS student building small AI/software projects, creating content, and documenting the journey from classroom to career.">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Mansvi Sahu — mansvi.init()">
+<meta name="twitter:description" content="CS student building small AI/software projects, creating content, and documenting the journey from classroom to career.">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'%3E%3Crect width='100' height='100' rx='20' fill='%231B1B2F'/%3E%3Ctext x='50' y='68' font-size='58' font-family='monospace' fill='%23FF6B5B' text-anchor='middle'%3EM%3C/text%3E%3C/svg%3E">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,600;0,9..144,700;1,9..144,500&family=Work+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg: #F1EEFF;
+    --bg-alt: #E8E3FF;
+    --ink: #1B1B2F;
+    --ink-soft: #4A4763;
+    --coral: #FF6B5B;
+    --teal: #2EC4B6;
+    --yellow: #FFD23F;
+    --line: #C9C2F0;
+    --card: #FBFAFF;
+    --radius: 14px;
+  }
+  *{ box-sizing: border-box; }
+  html{ scroll-behavior: smooth; }
+  body{
+    margin:0;
+    background: var(--bg);
+    color: var(--ink);
+    font-family: 'Work Sans', sans-serif;
+    line-height: 1.5;
+    -webkit-font-smoothing: antialiased;
+  }
+  ::selection{ background: var(--yellow); color: var(--ink); }
+  a{ color: inherit; }
+  .wrap{ max-width: 920px; margin: 0 auto; padding: 0 24px; }
+
+  /* focus visibility */
+  a:focus-visible, button:focus-visible{
+    outline: 3px solid var(--coral);
+    outline-offset: 3px;
+  }
+
+  .mono{ font-family: 'IBM Plex Mono', monospace; }
+
+  header.nav{
+    position: sticky; top:0; z-index: 20;
+    background: rgba(241,238,255,0.85);
+    backdrop-filter: blur(6px);
+    border-bottom: 1px solid var(--line);
+  }
+  .nav-inner{
+    display:flex; align-items:center; justify-content: space-between;
+    padding: 16px 24px; max-width: 920px; margin:0 auto;
+  }
+  .logo{
+    font-family:'IBM Plex Mono', monospace; font-weight:600; font-size: 15px;
+    display:flex; align-items:center; gap:4px;
+  }
+  .logo .cursor{
+    display:inline-block; width:8px; height:16px; background: var(--coral);
+    animation: blink 1s steps(1) infinite;
+  }
+  @keyframes blink{ 50%{ opacity: 0; } }
+  nav.links{ display:flex; gap: 22px; font-family:'IBM Plex Mono', monospace; font-size: 13px; }
+  nav.links a{ text-decoration:none; color: var(--ink-soft); position:relative; padding: 2px 0; }
+  nav.links a:hover{ color: var(--coral); }
+
+  /* HERO */
+  .hero{ padding: 72px 0 48px; }
+  .terminal{
+    background: var(--ink);
+    border-radius: var(--radius);
+    padding: 20px 24px 26px;
+    box-shadow: 6px 6px 0 var(--coral);
+  }
+  .terminal-bar{ display:flex; gap:7px; margin-bottom: 16px; }
+  .dot{ width:11px; height:11px; border-radius:50%; }
+  .dot.r{ background:#FF6B5B; } .dot.y{ background:#FFD23F; } .dot.g{ background:#2EC4B6; }
+  .term-path{ color:#8B87B0; font-family:'IBM Plex Mono',monospace; font-size:12px; margin-bottom: 14px; }
+  .headline{
+    font-family:'Fraunces', serif; font-weight:600; font-style: italic;
+    color:#F1EEFF; font-size: clamp(28px, 5vw, 46px); line-height:1.15; margin:0 0 6px;
+  }
+  .headline .type-cursor{ display:inline-block; width: 3px; background: var(--yellow); animation: blink 0.9s steps(1) infinite; margin-left: 2px; }
+  .sub{ color:#B7B3DD; font-family:'IBM Plex Mono',monospace; font-size: 14px; margin-top: 10px; }
+  .tags{ display:flex; flex-wrap:wrap; gap:8px; margin-top: 22px; }
+  .tag{
+    font-family:'IBM Plex Mono',monospace; font-size:12px; padding: 5px 10px;
+    border-radius: 20px; border:1px solid;
+  }
+  .tag.c1{ color: var(--coral); border-color: var(--coral); }
+  .tag.c2{ color: var(--teal); border-color: var(--teal); }
+  .tag.c3{ color: var(--yellow); border-color: var(--yellow); }
+
+  /* SECTION SHARED */
+  section{ padding: 56px 0; border-top: 1px solid var(--line); scroll-margin-top: 76px; }
+  .eyebrow{
+    font-family:'IBM Plex Mono', monospace; font-size: 12px; color: var(--coral);
+    text-transform: uppercase; letter-spacing: 0.08em; margin: 0 0 8px;
+  }
+  h2.section-title{
+    font-family:'Fraunces', serif; font-weight:700; font-size: clamp(24px,3.4vw,32px);
+    margin: 0 0 28px;
+  }
+
+  /* ABOUT */
+  .about-grid{ display:grid; grid-template-columns: 1fr; gap: 18px; }
+  .about-text{ font-size: 16px; color: var(--ink-soft); max-width: 640px; }
+  .about-text strong{ color: var(--ink); }
+
+  /* CHANGELOG (experience) */
+  .changelog{ display:flex; flex-direction:column; gap: 0; }
+  .entry{
+    display:grid; grid-template-columns: 96px 1fr; gap: 20px;
+    padding: 22px 0; border-top: 1px dashed var(--line);
+  }
+  .entry:first-child{ border-top:none; }
+  .version{ font-family:'IBM Plex Mono',monospace; font-weight:600; color: var(--coral); font-size:14px; }
+  .entry-role{ font-family:'Fraunces', serif; font-weight:600; font-size:19px; margin: 0 0 4px; }
+  .entry-meta{ font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--ink-soft); margin-bottom:10px; }
+  .diff{ list-style:none; padding:0; margin:0; font-size:14px; color: var(--ink-soft); }
+  .diff li{ padding: 3px 0 3px 20px; position:relative; }
+  .diff li.add::before{ content:"+"; position:absolute; left:0; color: var(--teal); font-family:'IBM Plex Mono',monospace; font-weight:600; }
+  .diff li.fix::before{ content:"~"; position:absolute; left:0; color: var(--yellow); font-family:'IBM Plex Mono',monospace; font-weight:700; }
+  .diff li.rm::before{ content:"–"; position:absolute; left:0; color: var(--coral); font-family:'IBM Plex Mono',monospace; font-weight:700; }
+
+  /* PROJECTS */
+  .releases{ display:grid; grid-template-columns: repeat(auto-fit, minmax(260px,1fr)); gap: 18px; }
+  .card{
+    background: var(--card); border:1px solid var(--line); border-radius: var(--radius);
+    padding: 20px; transition: transform .18s ease, box-shadow .18s ease;
+  }
+  .card:hover{ transform: translateY(-4px); box-shadow: 5px 5px 0 var(--teal); }
+  .card-top{ display:flex; justify-content:space-between; align-items:flex-start; margin-bottom:10px; }
+  .card-title{ font-family:'Fraunces', serif; font-weight:600; font-size:18px; margin:0; }
+  .badge{
+    font-family:'IBM Plex Mono',monospace; font-size:11px; padding:3px 8px; border-radius: 6px;
+    background: var(--yellow); color: var(--ink); font-weight:600; white-space:nowrap;
+  }
+  .card p{ color: var(--ink-soft); font-size:14px; margin: 0 0 12px; }
+  .card-num{ font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--teal); font-weight:600; }
+  .stack{ font-family:'IBM Plex Mono',monospace; font-size:11px; color: var(--ink-soft); margin: 0 0 10px; }
+  .card-link{ font-family:'IBM Plex Mono',monospace; font-size:12px; text-decoration:none; color: var(--coral); }
+  .card-link:hover{ text-decoration: underline; }
+
+  /* COMPACT CERT LIST */
+  .cert-list{ display:flex; flex-direction:column; gap:0; border:1px solid var(--line); border-radius: var(--radius); overflow:hidden; background: var(--card); }
+  .cert-row{ display:flex; justify-content:space-between; align-items:center; gap:12px; padding:14px 18px; border-top:1px solid var(--line); flex-wrap:wrap; }
+  .cert-row:first-child{ border-top:none; }
+  .cert-name{ font-size:14px; color: var(--ink); }
+  .cert-issuer{ font-family:'IBM Plex Mono',monospace; font-size:11px; color: var(--ink-soft); }
+  .cert-link{ font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--coral); text-decoration:none; white-space:nowrap; }
+  .cert-link:hover{ text-decoration: underline; }
+
+  /* SKILLS */
+  .features{ display:grid; grid-template-columns: repeat(auto-fit,minmax(200px,1fr)); gap:16px; }
+  .feature{ padding: 16px; border-radius: 10px; background: var(--bg-alt); }
+  .feature h3{ font-family:'IBM Plex Mono',monospace; font-size:13px; margin:0 0 6px; color: var(--ink); }
+  .feature p{ margin:0; font-size:13px; color: var(--ink-soft); }
+  .features.stats .feature{ background: var(--card); border:1px solid var(--line); }
+  .features.stats .feature h3{ font-family:'Fraunces', serif; font-weight:700; font-size:26px; color: var(--coral); }
+
+  /* CONTACT */
+  .issue-box{
+    border:1px solid var(--line); border-radius: var(--radius); background: var(--card);
+    padding: 26px; display:flex; flex-direction:column; gap:14px; max-width: 560px;
+  }
+  .issue-title{ font-family:'IBM Plex Mono',monospace; font-size:13px; color: var(--ink-soft); }
+  .cta-row{ display:flex; gap:12px; flex-wrap:wrap; }
+  .btn{
+    font-family:'IBM Plex Mono',monospace; font-size:13px; font-weight:600;
+    padding: 11px 18px; border-radius: 8px; text-decoration:none; display:inline-block;
+    border: 2px solid var(--ink);
+  }
+  .btn.primary{ background: var(--ink); color: var(--bg); }
+  .btn.primary:hover{ background: var(--coral); border-color: var(--coral); color: var(--ink); }
+  .btn.ghost{ color: var(--ink); }
+  .btn.ghost:hover{ background: var(--ink); color: var(--bg); }
+
+  footer{ padding: 30px 0 50px; font-family:'IBM Plex Mono',monospace; font-size:12px; color: var(--ink-soft); text-align:center; }
+
+  @media (max-width: 560px){
+    .entry{ grid-template-columns: 1fr; }
+  }
+
+  @media (prefers-reduced-motion: reduce){
+    .cursor, .type-cursor{ animation: none; }
+    .card{ transition:none; }
+  }
+</style>
+</head>
+<body>
+
+<header class="nav">
+  <div class="nav-inner">
+    <div class="logo">mansvi_sahu<span class="cursor"></span></div>
+    <nav class="links">
+      <a href="#about" data-scroll-to="about">about</a>
+      <a href="#log" data-scroll-to="log">log</a>
+      <a href="#projects" data-scroll-to="projects">projects</a>
+      <a href="#contact" data-scroll-to="contact">contact</a>
+    </nav>
+  </div>
+</header>
+
+<div class="wrap">
+  <section class="hero">
+    <div class="terminal">
+      <div class="terminal-bar">
+        <span class="dot r"></span><span class="dot y"></span><span class="dot g"></span>
+      </div>
+      <div class="term-path">~/mansvi-sahu/README.md</div>
+      <h1 class="headline" id="typed">CS student building AI projects, creating content, and documenting the journey from a Tier-3 college to tech.<span class="type-cursor">&nbsp;</span></h1>
+      <div class="sub">// Mansvi Sahu · B.Tech CS, 2025–2029 · Chhatarpur, India</div>
+    </div>
+    <div class="tags">
+      <span class="tag c1">#genai-tools</span>
+      <span class="tag c2">#content-creation</span>
+      <span class="tag c3">#data-analytics</span>
+      <span class="tag c1">#python-learning</span>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">// quick stats</p>
+    <h2 class="section-title">Building in public</h2>
+    <div class="features stats">
+      <div class="feature"><h3>33,767</h3><p>LinkedIn impressions, last 90 days</p></div>
+      <div class="feature"><h3>13,143</h3><p>Members reached on LinkedIn</p></div>
+      <div class="feature"><h3>62%</h3><p>Reach outside my own network</p></div>
+    </div>
+  </section>
+
+  <section id="about">
+    <p class="eyebrow">// about</p>
+    <h2 class="section-title">The short version</h2>
+    <div class="about-grid">
+      <p class="about-text">
+        I'm a first-year <strong>B.Tech Computer Science</strong> student who got hooked on two things at once: building with code, and telling stories that stick. Somewhere between spreadsheets, Canva boards, and GenAI prompts, I found my lane — content that's clear enough for anyone and sharp enough to convert.
+      </p>
+      <p class="about-text">
+        I've worked as a home tutor, helping students strengthen their academic performance, kept a family business's books spotless in Excel, and I'm currently teaching myself Python one weekend at a time. Give me a messy idea and I'll hand you back something people actually want to read.
+      </p>
+    </div>
+  </section>
+
+  <section id="log">
+    <p class="eyebrow">// changelog</p>
+    <h2 class="section-title">Release history</h2>
+    <div class="changelog">
+      <div class="entry">
+        <div class="version mono">v3.0.0</div>
+        <div>
+          <h3 class="entry-role">Marketing Intern — Internable</h3>
+          <div class="entry-meta">Ongoing · Startup founded by Bhavya Joshi</div>
+          <ul class="diff">
+            <li class="add">Added content writing and copy for marketing initiatives</li>
+            <li class="add">Added social media content, applying the same GenAI + Canva skillset used elsewhere</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="version mono">v2.0.0</div>
+        <div>
+          <h3 class="entry-role">Data Entry Operator — Family Business</h3>
+          <div class="entry-meta">Ongoing · Accounts Management, Chhatarpur</div>
+          <ul class="diff">
+            <li class="add">Added accurate, organized financial records for day-to-day accounts</li>
+            <li class="fix">Improved income/expense tracking with structured MS Excel spreadsheets</li>
+            <li class="add">Added sharper attention to detail through real-world bookkeeping</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="version mono">v1.1.0</div>
+        <div>
+          <h3 class="entry-role">Home Tutor — Freelance</h3>
+          <div class="entry-meta">Past experience · Chhatarpur</div>
+          <ul class="diff">
+            <li class="add">Added personalized teaching strategies for individual learning gaps</li>
+            <li class="fix">Improved a student's academic performance through consistent, focused sessions</li>
+            <li class="add">Added stronger communication, patience, and problem-solving skills</li>
+          </ul>
+        </div>
+      </div>
+      <div class="entry">
+        <div class="version mono">v1.0.0</div>
+        <div>
+          <h3 class="entry-role">B.Tech, Computer Science &amp; Engineering</h3>
+          <div class="entry-meta">2025 — 2029 · Shri Krishna University, Chhatarpur</div>
+          <ul class="diff">
+            <li class="add">Initial release — foundations in Python, computer science, and problem-solving</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="projects">
+    <p class="eyebrow">// currently building</p>
+    <h2 class="section-title">Things I've built</h2>
+    <div class="releases">
+      <div class="card">
+        <div class="card-top">
+          <h3 class="card-title"><span class="card-num">01 /</span> This portfolio site</h3>
+          <span class="badge" style="background:var(--teal);">shipped</span>
+        </div>
+        <p class="stack">Stack: HTML · CSS · JS</p>
+        <p>A changelog-themed personal site, designed, written, and coded from scratch — including its content, layout, and interactions.</p>
+        <a class="card-link" href="https://github.com/mansv-i">view on GitHub →</a>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3 class="card-title"><span class="card-num">02 /</span> Student expense tracker</h3>
+          <span class="badge" style="background:var(--ink); color:var(--bg);">in progress</span>
+        </div>
+        <p class="stack">Stack: Python · Excel</p>
+        <p>A CLI-style tool to log and categorize student spending from CSV data, with monthly summaries. Next up: category filtering with Pandas.</p>
+        <a class="card-link" href="https://github.com/mansv-i">follow along on GitHub →</a>
+      </div>
+      <div class="card">
+        <div class="card-top">
+          <h3 class="card-title"><span class="card-num">03 /</span> AI content idea generator</h3>
+          <span class="badge" style="background:var(--ink); color:var(--bg);">in progress</span>
+        </div>
+        <p class="stack">Stack: Python · GenAI prompting</p>
+        <p>A small prompt-driven tool that turns one topic into a week of content ideas — built to combine the AI and content sides of my work.</p>
+        <a class="card-link" href="https://github.com/mansv-i">follow along on GitHub →</a>
+      </div>
+    </div>
+    <p style="font-family:'IBM Plex Mono',monospace; font-size:12px; color:var(--ink-soft); margin-top:16px;">More on <a href="https://github.com/mansv-i" style="color:var(--coral);">github.com/mansv-i</a> — new repos going up as I build.</p>
+  </section>
+
+  <section id="work">
+    <p class="eyebrow">// learning &amp; certifications</p>
+    <h2 class="section-title">Certifications</h2>
+    <div class="cert-list">
+      <div class="cert-row">
+        <div><div class="cert-name">GenAI Powered Data Analytics</div><div class="cert-issuer">TATA · Forage · May 2026</div></div>
+        <a class="cert-link" href="https://www.theforage.com/completion-certificates/2sNmYuurxgpFYawco/wJMjCSKFhuj97x6F3_2sNmYuurxgpFYawco_3iJ8NpMRtdKNvoZQG_1780810748461_completion_certificate.pdf">verify →</a>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Software Engineering Job Simulation</div><div class="cert-issuer">Commonwealth Bank · Forage · June 2026</div></div>
+        <a class="cert-link" href="https://www.theforage.com/completion-certificates/ifobHAoMjQs9s6bKS/gMTdCXwDdLYoXZ3wG_ifobHAoMjQs9s6bKS_3iJ8NpMRtdKNvoZQG_1779814797592_completion_certificate.pdf">verify →</a>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Create Scroll-Stopping Content</div><div class="cert-issuer">Canva Design School · May 2026</div></div>
+        <a class="cert-link" href="https://www.canva.com/certifications/verify/072b54">verify →</a>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Introduction to Generative AI</div><div class="cert-issuer">Google Cloud · 2026</div></div>
+        <a class="cert-link" href="https://www.skills.google/public_profiles/09c9e0a3-fb47-46e2-8761-93d9fd4ac054">verify →</a>
+      </div>
+      <div class="cert-row">
+        <div><div class="cert-name">Career Guidance Session</div><div class="cert-issuer">GradGuru Innovations · July 2026</div></div>
+        <span class="cert-issuer">on request</span>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">// features</p>
+    <h2 class="section-title">Skills</h2>
+    <div class="features">
+      <div class="feature"><h3>Languages</h3><p>Python — building fundamentals through projects</p></div>
+      <div class="feature"><h3>Tools</h3><p>MS Excel, Canva, MS Office</p></div>
+      <div class="feature"><h3>AI</h3><p>GenAI tools, prompting, AI-driven workflows</p></div>
+      <div class="feature"><h3>Currently building</h3><p>Python projects, data analytics workflows</p></div>
+    </div>
+  </section>
+
+  <section>
+    <p class="eyebrow">// achievements</p>
+    <h2 class="section-title">Off the clock</h2>
+    <div class="tags" style="margin-top:0;">
+      <span class="tag c2">🏏 2nd place — inter-college cricket</span>
+      <span class="tag c3">🎭 2nd place — Nukkad Natak, youth festival</span>
+      <span class="tag c1">🤝 NSS certificate — community service</span>
+    </div>
+  </section>
+
+  <section id="contact">
+    <p class="eyebrow">// contact</p>
+    <h2 class="section-title">Open an issue</h2>
+    <div class="issue-box">
+      <div class="issue-title">Have a project, internship, or just want to say hi? Open an issue below.</div>
+      <div class="cta-row">
+        <a class="btn primary" href="mailto:sahumansvi2008@gmail.com">let's build something →</a>
+        <a class="btn ghost" href="Mansvi_Sahu_Resume.pdf" aria-label="Download resume PDF" download>resume.pdf →</a>
+        <a class="btn ghost" href="https://github.com/mansv-i" aria-label="View GitHub profile">github →</a>
+        <a class="btn ghost" href="https://www.linkedin.com/in/mansvi-sahu" aria-label="View LinkedIn profile">linkedin →</a>
+      </div>
+    </div>
+  </section>
+</div>
+
+<footer>
+  built by mansvi sahu · Chhatarpur, India · last commit: 2026
+</footer>
+
+<script>
+  const prefersReduced = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  // Smooth in-page nav scrolling (avoids anchor navigation issues in embedded previews)
+  document.querySelectorAll('[data-scroll-to]').forEach(function(link){
+    link.addEventListener('click', function(e){
+      e.preventDefault();
+      const target = document.getElementById(link.getAttribute('data-scroll-to'));
+      if(target){ target.scrollIntoView({ behavior: prefersReduced ? 'auto' : 'smooth' }); }
+    });
+  });
+
+  // Typewriter effect on hero headline
+  const el = document.getElementById('typed');
+  const plainText = "CS student building AI projects, creating content, and documenting the journey from a Tier-3 college to tech.";
+
+  if(!prefersReduced){
+    el.innerHTML = '<span class="type-cursor">&nbsp;</span>';
+    let i = 0;
+    const cursor = el.querySelector('.type-cursor');
+    function type(){
+      if(i <= plainText.length){
+        const chunk = plainText.slice(0, i).replace(/\n/g, '<br>');
+        el.innerHTML = chunk + '<span class="type-cursor">&nbsp;</span>';
+        i++;
+        setTimeout(type, 28);
+      }
+    }
+    type();
+  }
+</script>
+
+</body>
+</html>
